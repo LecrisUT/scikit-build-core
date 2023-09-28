@@ -106,6 +106,12 @@ class VEnv(EnvBuilder):
         self.wheelhouse = None
         self.install("pip>=21.3.1")
         self.wheelhouse = wheelhouse
+        self.platlib = Path(
+            self.execute("import sysconfig; print(sysconfig.get_path('platlib'))")
+        )
+        self.purelib = Path(
+            self.execute("import sysconfig; print(sysconfig.get_path('purelib'))")
+        )
 
     def ensure_directories(
         self, env_dir: str | bytes | os.PathLike[str] | os.PathLike[bytes]
