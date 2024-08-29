@@ -89,6 +89,28 @@ class SearchSettings:
     paths.
     """
 
+    ignore_entry_point: List[str] = dataclasses.field(default_factory=list)
+    """
+    Entry points to ignore. Any entry-point in `cmake.module`, `cmake.prefix`,
+    `cmake.root` with a key value matching a value in this list will be ignored
+    when building the search paths.
+    """
+
+    modules: List[str] = dataclasses.field(default_factory=list)
+    """
+    List of additional CMake module search paths. Populates `CMAKE_MODULE_PATH`.
+    """
+
+    prefixes: List[str] = dataclasses.field(default_factory=list)
+    """
+    List of additional CMake prefix search paths. Populates `CMAKE_PREFIX_PATH`.
+    """
+
+    roots: Dict[str, str] = dataclasses.field(default_factory=dict)
+    """
+    Dict of package names and prefix paths. Populates `<Pkg>_ROOT`.
+    """
+
 
 @dataclasses.dataclass
 class NinjaSettings:
