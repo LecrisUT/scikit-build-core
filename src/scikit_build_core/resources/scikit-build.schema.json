@@ -93,6 +93,17 @@
         }
       }
     },
+    "search": {
+      "additionalProperties": false,
+      "properties": {
+        "use-site-packages": {
+          "default": true,
+          "description": "Add the install (or build isolation) site_packages folder to the CMake prefix paths.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "ninja": {
       "type": "object",
       "additionalProperties": false,
@@ -598,6 +609,9 @@
           },
           "metadata": {
             "$ref": "#/properties/metadata"
+          },
+          "search": {
+            "$ref": "#/properties/search"
           },
           "strict-config": {
             "$ref": "#/properties/strict-config"

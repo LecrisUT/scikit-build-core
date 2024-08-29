@@ -308,6 +308,10 @@ messages.after-failure = ""
 # A message to print after a successful build.
 messages.after-success = ""
 
+# Add the install (or build isolation) site_packages folder to the CMake prefix
+# paths.
+search.use-site-packages = true
+
 # List dynamic metadata fields and hook locations in this table.
 metadata = {}
 

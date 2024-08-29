@@ -18,6 +18,7 @@ __all__ = [
     "MessagesSettings",
     "NinjaSettings",
     "SDistSettings",
+    "SearchSettings",
     "ScikitBuildSettings",
     "WheelSettings",
 ]
@@ -77,6 +78,15 @@ class CMakeSettings:
     targets: Optional[List[str]] = None
     """
     DEPRECATED in 0.10; use build.targets instead.
+    """
+
+
+@dataclasses.dataclass
+class SearchSettings:
+    use_site_packages: bool = True
+    """
+    Add the install (or build isolation) site_packages folder to the CMake prefix
+    paths.
     """
 
 
@@ -326,6 +336,7 @@ class ScikitBuildSettings:
     install: InstallSettings = dataclasses.field(default_factory=InstallSettings)
     generate: List[GenerateSettings] = dataclasses.field(default_factory=list)
     messages: MessagesSettings = dataclasses.field(default_factory=MessagesSettings)
+    search: SearchSettings = dataclasses.field(default_factory=SearchSettings)
 
     metadata: Dict[str, Dict[str, Any]] = dataclasses.field(default_factory=dict)
     """
