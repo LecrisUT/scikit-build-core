@@ -193,6 +193,7 @@ module = [
     "virtualenv",
     "auditwheel.*",
     "delocate.*",
+    "lief.*",
 ]
 ignore_missing_imports = true
 
@@ -329,3 +330,6 @@ known-local-folder = ["pathutils"]
 
 [tool.check-sdist]
 sdist-only = ["src/scikit_build_core/_version.py"]
+
+[tool.codespell]
+ignore-words-list = "lief"

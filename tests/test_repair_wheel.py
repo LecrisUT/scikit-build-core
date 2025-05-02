@@ -1,5 +1,4 @@
 import platform
-import shutil
 from pathlib import Path
 
 import pytest
@@ -48,8 +47,7 @@ def test_full_build(
         isolated.install("scikit-build-core")
         if platform.system() == "Linux":
             isolated.install("auditwheel")
-            if shutil.which("patchelf") is None:
-                isolated.install("patchelf")
+            isolated.install("lief")
         if platform.system() == "Darwin":
             isolated.install("delocate")
         isolated.install("./extern", isolated=with_isolation)

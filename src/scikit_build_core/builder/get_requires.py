@@ -5,7 +5,6 @@ import functools
 import importlib.util
 import os
 import platform
-import shutil
 import sysconfig
 from typing import TYPE_CHECKING, Literal
 
@@ -151,9 +150,7 @@ class GetRequires:
             platform_system = platform.system()
             if platform_system == "Linux":
                 yield "auditwheel"
-                patchelf_path = shutil.which("patchelf")
-                if patchelf_path is None:
-                    yield "patchelf"
+                yield "lief"
             elif platform_system == "Darwin":
                 yield "delocate"
 

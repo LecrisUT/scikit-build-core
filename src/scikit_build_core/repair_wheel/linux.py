@@ -6,7 +6,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from .._shutil import Run
 from .rpath import RpathWheelRepairer
 
 if TYPE_CHECKING:
@@ -39,6 +38,12 @@ class LinuxWheelRepairer(RpathWheelRepairer):
     def patch_library_rpath(self, artifact: Path, rpaths: list[str]) -> None:
         final_rpaths = set(rpaths)
         if final_rpaths:
-            run = Run()
-            run.live("patchelf", "--remove-rpath", artifact)
-            run.live("patchelf", "--set-rpath", ":".join(final_rpaths), artifact)
+            import lief
+
+            elf_rpaths = lief.ELF.DynamicEntryRunPath()
+            for rpath in final_rpaths:
+                elf_rpaths.append(rpath)
+            elf = lief.parse(artifact)
+            elf.remove(lief.ELF.DynamicEntry.TAG.RUNPATH)
+            elf.add(elf_rpaths)
+            elf.write(str(artifact))

@@ -56,7 +56,7 @@ def pep518_wheelhouse(tmp_path_factory: pytest.TempPathFactory) -> Path:
     ]
     if platform.system() == "Linux":
         packages.append("auditwheel")
-        packages.append("patchelf")
+        packages.append("lief")
     if platform.system() == "Darwin":
         packages.append("delocate")
 
