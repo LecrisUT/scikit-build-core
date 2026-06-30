@@ -15,8 +15,8 @@ from tempfile import TemporaryDirectory
 
 import virtualenv
 
-logging.basicConfig(level="INFO")
 logger = logging.getLogger(Path(__file__).name)
+logger.setLevel("INFO")
 
 EXAMPLES_DIR = Path(__file__).absolute().parent
 ROOT_DIR = EXAMPLES_DIR.parent.parent
@@ -32,7 +32,9 @@ def main(test_name: str) -> None:
         shutil.copytree(example_source, example_dir)
         venv_path = tmpdir / ".venv"
         logger.info("Setting up venv")
-        with virtualenv.cli_run(["--system-site-packages", str(venv_path)]) as venv:
+        with virtualenv.cli_run(
+            ["--system-site-packages", str(venv_path)], setup_logging=False
+        ) as venv:
             venv_exe = venv.creator.exe
             logger.info("Running pip install")
             subprocess.run(
